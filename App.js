@@ -3,16 +3,16 @@ import { StyleSheet, Text, View } from 'react-native';
 import Navigator from './route';
 
 export default function App() {
-  return (
-   <Navigator />
-  );
+    return ( <
+        Navigator / >
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 });
