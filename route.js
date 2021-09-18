@@ -4,6 +4,8 @@ import OnboardingPage from './screens/OnboardingPage';
 import SignupPage from './screens/SignupPage';
 import HomePage from './screens/HomePage';
 import LoginPage from './screens/LoginPage';
+import uploadImg from './screens/uploadImg';
+import imgResult from './screens/imgResult';
 
 const screens = {
     onboarding: {
@@ -17,6 +19,12 @@ const screens = {
     },
     home: {
         screen: HomePage
+    },
+    Result: {
+        screen: imgResult
+    },
+    Upload: {
+        screen: uploadImg
     }
 }
 

@@ -4,13 +4,13 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 export default function screen2({ navigation }) {
 
   const redirect = () => {
-    navigation.navigate('one');
+    navigation.navigate('Upload');
   }
   
   return (
     <View style={styles.container}>
       <Text>screen 2 text</Text>
-      <Button title="go to screen 1" onPress={redirect} />
+      <Button title="go to screen uploadImg" onPress={redirect} />
     </View>
   );
 }
