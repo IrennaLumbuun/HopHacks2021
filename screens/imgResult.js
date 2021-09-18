@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, Text, Image, View, SafeAreaView, ScrollView, Dimensions } from 'react-native';
+import Config from 'react-native-config'; // automatically gets all variables in file .env
+import axios from 'axios';
 
 export default function imgResult({ navigation }) {
   // TODO: delete later
@@ -8,12 +10,44 @@ export default function imgResult({ navigation }) {
 
   // TODO: uncomment later
   // const {b64img} = navigation.state.params.b64Img;
-
+  const [hasLabels, setHasLabels] = useState(false);
   // list: https://reactnative.dev/docs/using-a-listview 
 
   const redirect = () => {
     navigation.navigate('Upload');
   }
+
+  const getCleanB64String = (b64string) => {
+    // We want to remove the first chunk (e.g. "data:image/jpeg;base64,")
+    // so we find the comma and return the string after it
+    const idx = b64string.indexOf(',');
+    return b64string.substring(idx + 1) 
+  }
+
+  const getLabels = () =>{
+    const content = getCleanB64String(b64img);
+    let data =JSON.stringify({"requests":[{"image":{"content":content},"features":[{"type":"LABEL_DETECTION"}]}]});
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.addEventListener("readystatechange", function() {
+      if(this.readyState === 4) {
+        if (this.status === 200) {
+          const response = this.responseText;
+          console.log(response);
+        }
+      }
+    });
+
+    xhr.open("POST", `https://vision.googleapis.com/v1/images:annotate?key=${process.env.API_KEY}`);
+
+    xhr.send(data);
+  }
+
+  if (!hasLabels) {
+    getLabels();
+  }
+
   
   return (
     <SafeAreaView style={styles.container}>
