@@ -2,7 +2,6 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import OnboardingPage from './screens/OnboardingPage';
 import SignupPage from './screens/SignupPage';
-import HomePage from './screens/HomePage';
 import LoginPage from './screens/LoginPage';
 import uploadImg from './screens/uploadImg';
 import imgResult from './screens/imgResult';
@@ -16,9 +15,6 @@ const screens = {
     },
     signup: {
         screen: SignupPage
-    },
-    home: {
-        screen: HomePage
     },
     Upload: {
         screen: uploadImg
