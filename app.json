@@ -13,16 +13,27 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "config": {
+        "googleMapsApiKey": "AIzaSyA55xIIs4SXFxfEHDvgz706yBaUje0n24c"
+      },
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "This app uses location to determine nearby food banks.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "This app uses location to determine nearby food banks.",
+        "NSLocationAlwaysUsageDescription": "This app uses location to determine nearby food banks."
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
+      },
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyA55xIIs4SXFxfEHDvgz706yBaUje0n24c"
+        }
       }
     },
     "web": {
