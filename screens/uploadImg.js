@@ -29,7 +29,8 @@ export default function uploadImg({ navigation }) {
     });
 
     if (!result.cancelled) {
-      setB64Image('data:image/png;base64,' + result.base64);
+      console.log(result);
+      setB64Image(result.uri);
     }
   };
 
@@ -48,20 +49,27 @@ export default function uploadImg({ navigation }) {
 
 
   const getLabels = async () =>{
+    console.log("pressed")
     const content = getCleanB64String(b64Image);
     let data =JSON.stringify({"requests":[{"image":{"content":content},"features":[{"type":"LABEL_DETECTION"}]}]});
 
-    var xhr = new XMLHttpRequest();
+    let  myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
 
-    xhr.addEventListener("readystatechange", function() {
-      let foodInImg = [];
-      if(this.readyState === 4) {
-        if (this.status === 200) {
-          const response = JSON.parse(this.responseText)["responses"][0]['labelAnnotations'];
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: data,
+      redirect: 'follow'
+    };
+
+    fetch(`https://vision.googleapis.com/v1/images:annotate?key=${process.env.API_KEY}`, requestOptions)
+      .then(response => response.text())
+      .then(result => {
+        const response = JSON.parse(result)["responses"][0]['labelAnnotations'];
           response.forEach(item => {
             let name = item.description.toLowerCase();
-            
-            console.log("here")
+
             // brute force search
             foodName.forEach( fn => {
               if (fn.includes(name)){
@@ -71,7 +79,6 @@ export default function uploadImg({ navigation }) {
             })
 
             sleep(1000).then(() => {
-               console.log(foodInImg)
                 // redirect
                 navigation.navigate('Result', {
                   b64Img: b64Image,
@@ -79,12 +86,8 @@ export default function uploadImg({ navigation }) {
                });
             })
           })
-        }
-      }
-    });
-
-    xhr.open("POST", `https://vision.googleapis.com/v1/images:annotate?key=${process.env.API_KEY}`);
-    xhr.send(data);
+      })
+      .catch(error => console.log('error', error));
   }
 
   return (

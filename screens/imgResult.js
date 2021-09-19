@@ -2,57 +2,55 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, Image, View, SafeAreaView, ScrollView, Dimensions, SectionList } from 'react-native';
 import Classifier from 'ml-classify-text'
 import { generateSlug } from "random-word-slugs"; 
-import brain from 'brainjs';
+// import brain from 'brainjs';
 
 export default function imgResult({ navigation }) {
-  console.log(navigation.state.params);
-  const {b64img, foodInImg} = navigation.state.params;
-  console.log(foodInImg);
+  const {b64Img, foodInImg} = navigation.state.params;
   const redirect = () => {
     navigation.navigate('Upload');
   }
 
-// not used
-  const brainClassifier = () => {
-    var net = new brain.NeuralNetwork();
-    let trainData = [];
-    let foodItems = foodName;
-    let nonFoodItems = new Set();
+// // not used
+//   const brainClassifier = () => {
+//     var net = new brain.NeuralNetwork();
+//     let trainData = [];
+//     let foodItems = foodName;
+//     let nonFoodItems = new Set();
 
-    // generate non food items
-    const options = {
-      format: "camel",
-      partsOfSpeech: ["noun"],
-      categories: {
-        noun: ["animals", "people", "family", "education", "religion", "business", "thing", "transporation", "technology", "place", "profession", "media", "time", "health", "sports", "science"],
-      },
-    };
+//     // generate non food items
+//     const options = {
+//       format: "camel",
+//       partsOfSpeech: ["noun"],
+//       categories: {
+//         noun: ["animals", "people", "family", "education", "religion", "business", "thing", "transporation", "technology", "place", "profession", "media", "time", "health", "sports", "science"],
+//       },
+//     };
 
-    for (let i = 0; i < 5000; i++){
-      nonFoodItems.add(generateSlug(1, options))
-    }
-    nonFoodItems = Array.from(nonFoodItems);
+//     for (let i = 0; i < 5000; i++){
+//       nonFoodItems.add(generateSlug(1, options))
+//     }
+//     nonFoodItems = Array.from(nonFoodItems);
 
-    foodItems.forEach( item => {
-      trainData.push({
-        input: item,
-        output: [0]
-      })
-    })
+//     foodItems.forEach( item => {
+//       trainData.push({
+//         input: item,
+//         output: [0]
+//       })
+//     })
 
-    nonFoodItems.forEach( item => {
-      trainData.push({
-        input: item,
-        output: [1]
-      })
-    })
+//     nonFoodItems.forEach( item => {
+//       trainData.push({
+//         input: item,
+//         output: [1]
+//       })
+//     })
 
-    console.log(trainData)
+//     console.log(trainData)
 
-    net.train(trainData);
-    let output = net.run("sugar");
-    console.log(output)
-  }
+//     net.train(trainData);
+//     let output = net.run("sugar");
+//     console.log(output)
+//   }
 
 // not used
   const trainClassifier = () => {
@@ -97,15 +95,13 @@ export default function imgResult({ navigation }) {
     )
   }
 
-  groupFoodByFirstLetter();
-  
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <View style={styles.view}>
           <Image source={require('../assets/vegetables.jpg')} style={styles.imgHeader} />
           <Text style={styles.text}>Your food has been labeled here.</Text>
-          <Image source={{ uri: b64img }} style={styles.resultImg} />
+          <Image source={{ uri: b64Img }} style={styles.resultImg} />
           <View style={[styles.viewAvailableFood]}>
             <Text style={[styles.text, {marginBottom: 20}]}>Found: </Text>
             {groupFoodByFirstLetter()}
@@ -140,7 +136,7 @@ const styles = StyleSheet.create({
   },
   resultImg: {
     width: Dimensions.get('window').width * 0.9,
-    aspectRatio: 1,
+    height: Dimensions.get('window').width * 0.9,
     marginVertical: 20,
 
     //TODO: delete this
