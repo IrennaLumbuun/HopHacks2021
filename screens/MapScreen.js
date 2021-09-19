@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   FlatList,
   Image,
-  Icon
+  Icon,
 } from "react-native";
 import MapView, { PROVIDER_GOOGLE, Marker, Callout } from "react-native-maps";
 //import Geolocation from '@react-native-community/geolocation';
@@ -16,6 +16,7 @@ import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import * as Font from "expo-font";
 import { useFonts, Anton_400Regular } from "@expo-google-fonts/anton";
+import Constants from "expo-constants";
 
 export class MapScreen extends React.Component {
   // locateCurrentPosition = () => {
@@ -47,7 +48,15 @@ export class MapScreen extends React.Component {
     latitude: 37.78825,
     longitude: -122.4324,
     foodBankList: [],
+    region: {
+      latitude: 37.78825,
+      longitude: -122.4324,
+      latitudeDelta: 0.015,
+      longitudeDelta: 0.0121,
+    },
   };
+
+  phoneNumberList = [];
 
   componentDidMount() {
     this.getLocationAsync();
@@ -56,7 +65,6 @@ export class MapScreen extends React.Component {
   async getLocationAsync() {
     const { status } = await Location.requestForegroundPermissionsAsync();
 
-    console.log(status);
 
     if (status === "granted") {
       let location = await Location.getCurrentPositionAsync({});
@@ -64,8 +72,13 @@ export class MapScreen extends React.Component {
         hasLocationPermissions: true,
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
+        region: {
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+          latitudeDelta: 0.015,
+          longitudeDelta: 0.0121,
+        },
       });
-      console.log(this.state.latitude);
     } else {
       alert("Location Permission not Granted!");
     }
@@ -88,19 +101,46 @@ export class MapScreen extends React.Component {
       "&key=" +
       key;
 
-    console.log(queryString);
     fetch(queryString)
       .then((response) => response.json())
       .then((result) => this.setState({ foodBankList: result }));
   };
 
+  // Another Query to get the phone number
+  handleNotification = (place_id) => {
+    const url = "https://maps.googleapis.com/maps/api/place/details/json?";
+    const fields = "formatted_phone_number";
+    const key = "AIzaSyA55xIIs4SXFxfEHDvgz706yBaUje0n24c";
+    const queryString =
+      url + "fields=" + fields + "&place_id=" + place_id + "&key=" + key;
+
+    console.log(queryString);
+    fetch(queryString).then((response) => response.json()).then((result) => this.phoneNumberList = result);
+
+    // const client = require("twilio")(
+    //   "AC521cfb478637b417dc3b9abd4c91e92c",
+    //   "d60fb113ac3ee4f38bf206063608197f"
+    // );
+
+    // client.messages
+    //   .create({
+    //     to: this.phoneNumberList,
+    //     messagingServiceSid: "MG997794235237e0684d12b7f8085b011b",
+    //     body: "Food is available for pickup!",
+    //   })
+
+  };
+
   render() {
     console.log(this.state.foodBankList);
     const renderItem = ({ item }) => {
-      const { icon, name } = item;
+      const { icon, name, place_id } = item;
 
       return (
-        <TouchableOpacity style={this.styles.itemContainer}>
+        <TouchableOpacity
+          style={this.styles.itemContainer}
+          onPress={() => this.handleNotification(place_id)}
+        >
           <View style={this.styles.item}>
             {icon ? (
               <Image
@@ -112,13 +152,15 @@ export class MapScreen extends React.Component {
                 style={{ width: 45, height: 45, backgroundColor: "grey" }}
               ></View>
             )}
-            <View style={{flexDirection: 'row'}}>
-                <Text>
-                    {name}
-                </Text>
+            <View>
+              <View style={{ flexDirection: "row" }}>
+                <Text>{name}</Text>
+              </View>
+              <Text style={{ color: "red" }}>
+                Tap to Send Notification of Available Leftovers!
+              </Text>
             </View>
           </View>
-
         </TouchableOpacity>
       );
     };
@@ -132,16 +174,14 @@ export class MapScreen extends React.Component {
           showUserLocation={true}
           provider={PROVIDER_GOOGLE}
           showUserLocation={true}
-          initialRegion={{
-            latitude: this.state.latitude,
-            longitude: this.state.longitude,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          }}
+          region={this.state.region}
         >
           <Marker
-            coordinate={{ latitude: 37.7825259, longitude: -122.4351431 }}
-            title={"San Francisco"}
+            coordinate={{
+              latitude: this.state.latitude,
+              longitude: this.state.longitude,
+            }}
+            title={"Your Location"}
           >
             <Callout>
               <Text>Your location</Text>
@@ -156,10 +196,13 @@ export class MapScreen extends React.Component {
         <FlatList
           data={this.state.foodBankList.results}
           keyExtractor={(item) => item.place_id}
-        //   renderItem={({ item }) => (
-        //     //   <Text style={{ color: "gold", fontSize: 32 }}>{item.name}</Text>
-        //     <TouchableOpacity></TouchableOpacity>
+          //   renderItem={({ item }) => (
+          //     //   <Text style={{ color: "gold", fontSize: 32 }}>{item.name}</Text>
+          //     <TouchableOpacity></TouchableOpacity>
           renderItem={renderItem}
+          ItemSeparatorComponent={() => (
+            <View style={{ height: 1, backgroundColor: "grey" }}></View>
+          )}
           //)}
           style={this.styles.list}
         ></FlatList>
@@ -181,7 +224,7 @@ export class MapScreen extends React.Component {
     },
     title: {
       fontSize: 48,
-      color: "white",
+      color: "#051d5f",
     },
     map: {
       backgroundColor: "greenyellow",
@@ -208,15 +251,13 @@ export class MapScreen extends React.Component {
       flexGrow: 1,
     },
     item: {
-        flexDirection: "row",
-        paddingVertical: 10,
-
+      flexDirection: "row",
+      paddingVertical: 10,
     },
     itemContainer: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-   
-    }
+      flexDirection: "row",
+      justifyContent: "space-between",
+    },
   });
 }
 
