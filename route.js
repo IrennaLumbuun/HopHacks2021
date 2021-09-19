@@ -20,12 +20,12 @@ const screens = {
     home: {
         screen: HomePage
     },
+    Upload: {
+        screen: uploadImg
+    },
     Result: {
         screen: imgResult
     },
-    Upload: {
-        screen: uploadImg
-    }
 }
 
 const stack = createStackNavigator(screens);

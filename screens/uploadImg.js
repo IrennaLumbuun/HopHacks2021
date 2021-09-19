@@ -29,8 +29,7 @@ export default function uploadImg({ navigation }) {
     });
 
     if (!result.cancelled) {
-      console.log(result);
-      setB64Image(result.uri);
+      setB64Image(result.uri.substring(0, 4) === "data" ? result.uri : `data:image/jpeg;base64,${result.base64}`);
     }
   };
 
@@ -45,8 +44,6 @@ export default function uploadImg({ navigation }) {
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-
-
 
   const getLabels = async () =>{
     console.log("pressed")
@@ -66,6 +63,7 @@ export default function uploadImg({ navigation }) {
     fetch(`https://vision.googleapis.com/v1/images:annotate?key=${process.env.API_KEY}`, requestOptions)
       .then(response => response.text())
       .then(result => {
+        console.log(result)
         const response = JSON.parse(result)["responses"][0]['labelAnnotations'];
           response.forEach(item => {
             let name = item.description.toLowerCase();

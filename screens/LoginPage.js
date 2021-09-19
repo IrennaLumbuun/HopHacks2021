@@ -54,7 +54,7 @@ export default function LoginPage({ navigation }) {
           .signInWithEmailAndPassword(email, password)
           .then(() => {
             console.log('User account created & signed in!');
-            navigation.navigate('home');
+            navigation.navigate('Upload');
           })
           .catch(error => {
             console.error(error);
