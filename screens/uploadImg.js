@@ -70,7 +70,7 @@ export default function uploadImg({ navigation }) {
 
             // brute force search
             foodName.forEach( fn => {
-              if (fn.includes(name)){
+              if (fn === name){
                 console.log(fn, name)
                 foodInImg.push(name);
               }
