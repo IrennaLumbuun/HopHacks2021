@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "hophacks2021",
+  "private_key_id": "e4826a306d53e8cc09bbfcfd5338ed78603496e8",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC1eMZ+er1VW2aQ\nr7qXLCOahKoeFq0yKixP3gN3NLVRryv0vuVzkIsNIS7Lqcyb7eBshvWz88G2V6VK\nhUJUFtyRThqnZMZf4jspnibNqRKMX7EWy5ukam8uZCk58VaPk/cKmZStAfhsRYGz\nKh+fDgjj/m4dGgZzlUCgtJf9HaJth9JkAS3L9J08//aNlopxMSWf6AqvM0W4zU4C\nOMbgmaBCxQM1FqboYjavNt5VHeQAWOxDaNyl9VhVMPmZxavCrJR9FVmooyCz3pB6\n+FNtet1ytxB5EptCZQN5/4TDLIHlJ5kSE1UumZO1a1uXM0N3lXtQyvjlt8YGkxXJ\nH317Pt9LAgMBAAECggEAMRmQe0AyYhns0lD5p1Vl/LTQYnu4OM54VtO3FFXKiWNf\n/UR5SJ9fQBouUySKG9Zs1nBdombdjryAGH2dyKq22wnK5Ge71M2dPFFyJksMnbZ2\nb7h/UCkME/09ulO2G/ro6JFNTNIvqPvVb+iBzcM6XJXGrVERVcyYQ+MZDH8sJ34W\nA/x59UCSpngWu8uTx42+BqVm4VLJIagoJQ0ZbCzqGrElrzr+xIVoKrNLrlYfNV3P\nDL1tlNWnnPfe/RxkNkDSUC3Bm1PaC1BW8LxWQM2V9y4Q20/wiQwnRj7m1mg/sZBS\nkNcaG5uVKwp2Expb6Myi7b9XMz9L57MUtgIoeJ+ZQQKBgQD+2OXvoRV+cFc1Q8m9\nW5nKYHCriivhKoxm8L2oB3kuv+MEApRJuI88jspG+C9tVfTsEipE8IK6V7G+H2nb\nIdMUG2WUiEWoTGe7Ree3aoktnsm7gUxsezA8PyEPff/237Pdbcb8FEhtKk21wEDe\nkQKCRksJfSzg/U5v9I7qoOhAkwKBgQC2SulgrR24p+Q4BXMuZ0ifRTERx6ALgDO1\nu8OPNW7kFyJwYRpFoeATeg7Uqyerkh8ZvP1NlaOjq2LDSeqbwATc0qReJRRXNfBr\nR9f4+G+njwhMzi7/st5hrFBSqOtQfuW6H6AZTyH1a003dZOG/Ax64iiMN2uMoy7e\n3s12dUbxaQKBgD2QeDujVmXtDaQ4dAvijQxur8lA38jNVo2nqqlk5Ml+YYEefmQw\nyal/dS4f1pU7JqfA26U71NjfRnj/bbsaOLuqwqdXJDy7+HMtOAT/H5R9v44kdine\nuJBVT89GSQeCkxjy5BcRb02v4oX9o64gqdJ+2LG6I5VWnBQ/qCbWKEUxAoGBALBw\nt4zMYs0dK+cRV1fdvkvyg7kq1/zpvKM1NuaBGHEK91mAkxY8xQ71AC/V7dLB3vph\nk2cp5DaBp1lQTRUteUdnVpKNHy/+VFLyOdeQVzn+VlFI6/KwZVByoVgwiXrjKGXL\nQIHetwa9MgLw+bcYdNfn2MlGxwFb3Pz4+DOk9eKpAoGAJ9MmyEm1/ATc+o9t/DR0\nm3qH+p61qxfDMmhP180jh3B9njnM22H8z4XTTwqDGfkn6WvkO4s0AdjxqxGDnF+d\nECrAvedHGi46KTJlbWmshuXtd5zX/LDuh9IVcCrvZ5j8QuyZIUqfR8NwXjWcukEM\nbvnxlBzbJ3b6lohyL/LV+Ac=\n-----END PRIVATE KEY-----\n",
+  "client_email": "fooddetector@hophacks2021.iam.gserviceaccount.com",
+  "client_id": "116800500706272108673",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/fooddetector%40hophacks2021.iam.gserviceaccount.com"
+}
