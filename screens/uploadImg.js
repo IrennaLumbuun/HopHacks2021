@@ -98,7 +98,7 @@ export default function uploadImg({ navigation }) {
         style={styles.background}
       />
         <Text style={[styles.text, styles.title]}>Waste Fighter</Text>
-        <Image source ={require('../assets/logo.png')} />
+        <Image source ={require('../assets/logo-Donte_Instant.png')} style={{width:200, height:200}} />
         <Text style={[styles.text, styles.paragraph]}>Please capture an image of your leftover food:</Text>
         <TouchableOpacity style={styles.button}
           onPress={() => pickImage()}>
@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     minHeight: Dimensions.get('window').height,
+    zIndex: -1
   },
   text: {
     marginHorizontal: 20,

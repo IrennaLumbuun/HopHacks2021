@@ -115,7 +115,7 @@ export default function imgResult({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'rgba(210,138,181,255)',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -162,5 +162,6 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 18,
     height: 44,
+    backgroundColor: '#d3d3d3'
   },
 });

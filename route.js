@@ -7,15 +7,15 @@ import uploadImg from './screens/uploadImg';
 import imgResult from './screens/imgResult';
 
 const screens = {
-    onboarding: {
-        screen: OnboardingPage
-    },
-    login: {
-        screen: LoginPage
-    },
-    signup: {
-        screen: SignupPage
-    },
+    // onboarding: {
+    //     screen: OnboardingPage
+    // },
+    // login: {
+    //     screen: LoginPage
+    // },
+    // signup: {
+    //     screen: SignupPage
+    // },
     Upload: {
         screen: uploadImg
     },
